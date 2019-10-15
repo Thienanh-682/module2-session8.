@@ -13,47 +13,47 @@ class StudentManager
 
     function getAll()
     {
-        $sql = "SELECT*FROM staffs";
+        $sql = "SELECT * FROM students";
         $stmt = $this->studentDB->query($sql);
         $result = $stmt->fetchAll();
-        $staffs = [];
+        $students = [];
         foreach ($result as $value) {
             $student = new Student($value['name'], $value['phone']);
             $student->id = $value['id'];
-            array_push($staffs, $student);
+            array_push($students, $student);
         }
-        return $staffs;
+        return $students;
     }
 
     function insert($student)
     {
-        $stmt = $this->studentDB->prepare('INSERT INTO staffs(name,phone) VALUES (:name , :phone)');
+        $stmt = $this->studentDB->prepare('INSERT INTO students(name, phone) VALUES (:name , :phone)');
         $stmt->bindParam(':name', $student->name);
         $stmt->bindParam(':phone', $student->phone);
         $stmt->execute();
     }
 
-    function delete($index)
+    function delete($id)
     {
-        $stmt = $this->studentDB->prepare('DELETE FROM staffs WHERE id=:id');
-        $stmt->bindParam(':id', $index);
+        $stmt = $this->studentDB->prepare('DELETE FROM students WHERE id=:id');
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 
-    function showEdit($index)
+    function findStudentById($id)
     {
-        $stmt = $this->studentDB->prepare('SELECT phone,name FROM `staffs` WHERE id=:id');
-        $stmt->bindParam(':id', $index);
+        $stmt = $this->studentDB->prepare('SELECT phone,name FROM `students` WHERE id=:id');
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    function update($index, $name, $phone)
+    function update($id, $student)
     {
-        $stmt = $this->studentDB->prepare('UPDATE staffs SET name=:name , phone=:phone WHERE id=:id');
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':id', $index);
+        $stmt = $this->studentDB->prepare('UPDATE students SET name=:name,phone=:phone WHERE id=:id');
+        $stmt->bindParam(':name', $student->name);
+        $stmt->bindParam(':phone', $student->phone);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 }
