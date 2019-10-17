@@ -37,7 +37,7 @@ $image = $stmt['image'];
         <tr>
             <td>Image:</td>
             <td>
-                <img src="<?php echo $image ?>" width="50" height="50">
+                <img src="../<?php echo $image ?>" width="50" height="50">
                 <input type="file" name="image"><br>
             </td>
         </tr>
