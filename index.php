@@ -14,7 +14,8 @@ $manager = new StudentManager();
     <title>Document</title>
 </head>
 <body>
-<form action="CRUD/insert.php" method="get">
+<form action="CRUD/insert.php" method="post" enctype="multipart/form-data">
+    <center>
     <table>
         <tr>
             <td>Name:</td>
@@ -25,16 +26,24 @@ $manager = new StudentManager();
             <td><input type="text" placeholder="Input Phone Number" name="phone"></td>
         </tr>
         <tr>
+            <td>Image:</td>
             <td>
+                <input type="file" name="image"><br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
                 <input type="submit" value="insert">
             </td>
         </tr>
     </table>
-    <table>
+
+    <table border="1" width="100%" >
         <tr>
             <td style="width: 200px">ID</td>
             <td style="width: 200px">Name</td>
             <td style="width: 200px">Phone Number</td>
+            <td style="width: 200px">Image</td>
         </tr>
 
         <?php
@@ -44,12 +53,13 @@ $manager = new StudentManager();
                 <td><?php echo ++$key ?></td>
                 <td><?php echo $student->name; ?></td>
                 <td><?php echo $student->phone; ?></td>
+                <td><img src="<?php echo $student->image ?>" width="50" height="50"></td>
                 <td><a href="CRUD/delete.php?id=<?php echo $student->id ?>">Del</a></td>
                 <td><a href="CRUD/edit.php?id=<?php echo $student->id ?>">Edit</a></td>
             </tr>
         <?php endforeach; ?>
-
     </table>
+    </center>
 </form>
 </body>
 </html>

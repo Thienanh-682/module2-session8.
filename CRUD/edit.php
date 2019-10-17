@@ -4,9 +4,11 @@ include_once '../class/StudentManager.php';
 include_once '../class/DBConnect.php';
 $manager = new StudentManager();
 $index = $_GET['id'];
+
 $stmt = $manager->findStudentById($index);
 $name = $stmt['name'];
 $phone = $stmt['phone'];
+$image = $stmt['image'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,7 +20,8 @@ $phone = $stmt['phone'];
     <title>Document</title>
 </head>
 <body>
-<form action="update.php" method="get">
+<form action="update.php" method="post" enctype="multipart/form-data">
+    <center>
     <table>
         <tr style="display: none">
             <td><input type="text" name="id" value="<?php echo $index ?>"></td>
@@ -32,28 +35,19 @@ $phone = $stmt['phone'];
             <td><input type="text" name="phone" value="<?php echo $phone ?>"></td>
         </tr>
         <tr>
+            <td>Image:</td>
+            <td>
+                <img src="<?php echo $image ?>" width="50" height="50">
+                <input type="file" name="image"><br>
+            </td>
+        </tr>
+        <tr>
             <td>
                 <input type="submit" value="update">
             </td>
         </tr>
     </table>
-    <table>
-        <tr>
-            <td style="width: 200px">ID</td>
-            <td style="width: 200px">Name</td>
-            <td style="width: 200px">Phone Number</td>
-        </tr>
-
-        <?php
-        $students = $manager->getAll();
-        foreach ($students as $key => $student): ?>
-            <tr>
-                <td><?php echo ++$key ?></td>
-                <td><?php echo $student->name; ?></td>
-                <td><?php echo $student->phone; ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    </center>
 </form>
 
 </body>
