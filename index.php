@@ -53,7 +53,7 @@ $manager = new StudentManager();
                 <td><?php echo ++$key ?></td>
                 <td><?php echo $student->name; ?></td>
                 <td><?php echo $student->phone; ?></td>
-                <td><img src="<?php echo $student->image ?>" width="50" height="50"></td>
+                <td><img src="upload/<?php echo $student->image ?>" width="50" height="50"></td>
                 <td><a href="CRUD/delete.php?id=<?php echo $student->id ?>">Del</a></td>
                 <td><a href="CRUD/edit.php?id=<?php echo $student->id ?>">Edit</a></td>
             </tr>

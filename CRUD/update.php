@@ -12,7 +12,7 @@ $phone = $_POST['phone'];
 $images = $_FILES['image']['name'];
 $tmp_dir = $_FILES['image']['tmp_name'];
 
-$upload_dir = "upload/".basename($images);
+$upload_dir = "../upload/".basename($images);
 $imgExt = strtolower(pathinfo($images,PATHINFO_EXTENSION));
 $picProfile = rand(1000, 1000000).".".$imgExt;
 move_uploaded_file($tmp_dir, $upload_dir);
